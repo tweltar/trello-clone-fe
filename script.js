@@ -18,4 +18,4 @@ document.getElementById('check-close').addEventListener('click', function () {
     document.querySelector('.check-title').style.display = 'flex';
     document.querySelector('.check-buttons').style.display = 'flex';
     document.querySelector('.save-check').style.display = 'none';
-})
+});
