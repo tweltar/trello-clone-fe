@@ -90,20 +90,24 @@ nav, .option-bar {
 .searchbox {
     width: 150px;
     border: none;
-    background-color: var(--navbutton);
+    background-color: transparent;
     outline: none;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
-    transition: background-color 200ms ease;
+    transition: background-color 200ms ease-in;
 }
 
-.searchbox:hover,
-.searchbox:hover + #search-icon {
+.search {
+    background-color: var(--navbutton);
+}
+
+.search:hover {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
 .searchbox:focus {
     width: 300px;
+    padding: 6.5px;
     background-color: white;
 }
 
@@ -112,7 +116,6 @@ nav, .option-bar {
     color: white;
     padding: 6px 8px;
     font-size: 105%;
-    background-color: var(--navbutton);
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
@@ -239,6 +242,20 @@ nav, .option-bar {
 
 .card:hover {
     background-color: #f3f3f3;
+}
+
+.label-bar {
+    display: flex;
+    flex-flow: row wrap;
+    margin-bottom: 5px;
+}
+
+.label-div {
+    width: 40px;
+    height: 8px;
+    border-radius: 5px;
+    margin-right: 4px;
+    margin-bottom: 4px;
 }
 
 .footer {
@@ -578,6 +595,41 @@ nav, .option-bar {
     margin-top: 15px;
 }
 
+.activity-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-section {
+    display: flex;
+    flex-direction: row;
+}
+
+.comment {    
+    margin-left: 15px;
+    width: 100%;
+    height: 40px;
+    background-color: white;
+    border: 1px solid var(--card-button-hover);
+    padding: 10px;
+    font-size: 95%;
+    overflow-y: hidden;
+    resize: none;
+    outline: none;
+}
+
+.comment:hover {
+    box-shadow: 0.5px 1px 0.1px rgba(128, 128, 128, 0.3), -0.5px 0px 0.1px rgba(128, 128, 128, 0.3);
+}
+
+.comment:focus {
+    min-height: 80px;
+}
+
+textarea::placeholder {
+    color: rgba(15, 22, 87, 0.6);
+}
+
 .card-option-icon {
     margin-right: 10px;
 }
@@ -598,4 +650,66 @@ nav, .option-bar {
 
 .upgrade-team:hover {
     background-color: rgba(174, 71, 214, 0.4);
+}
+
+.label-bg {
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    top: 40px;
+    right: 220px;
+    border-radius: 3px;
+    padding: 10px;
+    background-color: white;
+    display: none;
+    flex-direction: column;
+}
+
+.label-bg > p {
+    text-align: center;
+    font-size: 95%;
+}
+
+.label-separator {
+    margin: 10px 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--card-button-hover);
+}
+
+.label-bg > input {
+    padding: 5px;
+    border: 2px solid var(--card-button-hover);
+    border-radius: 2px;
+    position: sticky;
+}
+
+.label-bg > input[type = 'search']::placeholder {
+    font-size: 95%;
+    color: rgba(15, 22, 87, 0.6);
+}
+
+.label-bg > input:focus {
+    outline-color: var(--outline);
+}
+
+.suggested-label {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.label-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.edit-label {
+    padding: 3px 6px;
+}
+
+.edit-label:hover {
+    background-color: var(--card-button-hover);
+    border-radius: 3px;
+    padding: 3px 6px;
 }

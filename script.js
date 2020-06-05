@@ -19,3 +19,7 @@ document.getElementById('check-close').addEventListener('click', function () {
     document.querySelector('.check-buttons').style.display = 'flex';
     document.querySelector('.save-check').style.display = 'none';
 });
+
+document.getElementById('label').addEventListener('click', function () {
+    document.querySelector('.label-bg').style.display = 'flex';
+})
