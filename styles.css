@@ -16,7 +16,7 @@ body {
     --navbutton: rgba(255, 255, 255, 0.2);
     --navbutton-hover: rgba(255, 255, 255, 0.1);
     --boardbutton-hover: rgba(255, 255, 255, 0.3);
-    --text: rgba(15, 22, 87, 0.7);
+    --text: rgba(12, 18, 66, 0.7);
     --lightertext: rgba(25, 25, 25, 0.5);
     --card-button: rgba(190, 190, 190, 0.2);
     --card-button-hover: rgba(190, 190, 190, 0.5);
@@ -196,6 +196,7 @@ nav, .option-bar {
 }
 
 .content {
+    height: 87vh;
     padding: 3px 10px;
     overflow-y: hidden;
     font-size: 85%;
@@ -247,7 +248,12 @@ nav, .option-bar {
 .label-bar {
     display: flex;
     flex-flow: row wrap;
-    margin-bottom: 5px;
+}
+
+.card > p {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 95%;
 }
 
 .label-div {
@@ -256,6 +262,18 @@ nav, .option-bar {
     border-radius: 5px;
     margin-right: 4px;
     margin-bottom: 4px;
+}
+
+.card-details {
+    display: flex;
+    flex-direction: row;
+    margin: 3px 0;
+    padding: 0 3px;
+}
+
+.card-details > div {
+    font-size: 95%;
+    margin-right: 15px;
 }
 
 .footer {
@@ -591,7 +609,7 @@ nav, .option-bar {
 
 .add-check {
     width: fit-content;
-    margin-left: 40px;
+    margin-left: 45px;
     margin-top: 15px;
 }
 
