@@ -211,11 +211,12 @@ nav, .option-bar {
 
 .list {
     width: 270px;
-    background-color: #ebecf0;
+    background-color: #EBECF0;
     padding: 5px 10px;
     margin-right: 10px;
     border-radius: 3px;
     height: fit-content;
+    position: relative;
 }
 
 .list-title {
@@ -225,12 +226,35 @@ nav, .option-bar {
 
 .list .list-title > input {
     background-color: transparent;
-    outline: none;
+    outline-color: transparent;
     border: none;
     border-radius: 3px;
     width: 235px;
     padding: 3px 5px;
     font-weight: bold;
+    cursor: pointer;
+}
+
+.list .list-title > input:focus {
+    outline-color: var(--outline);
+}
+
+.list .list-title > a {
+    padding: 4px 7px;
+    border-radius: 2px;
+}
+
+.list .list-title > a:hover {
+    background-color: var(--card-button);
+}
+
+.cards {
+    max-height: 73vh;
+    overflow-y: auto;
+}
+
+.card-container {
+    position: relative;
 }
 
 .card {
@@ -238,11 +262,16 @@ nav, .option-bar {
     margin: 6px 0;
     padding: 5px;
     border-radius: 3px;
+    cursor: pointer;
     box-shadow: 0px 1px 0.1px rgba(128, 128, 128, 0.5);
 }
 
 .card:hover {
     background-color: #f3f3f3;
+}
+
+.card:hover + a {
+    opacity: 0.6;
 }
 
 .label-bar {
@@ -276,6 +305,98 @@ nav, .option-bar {
     margin-right: 15px;
 }
 
+.card-container > a {
+    opacity: 0;
+    padding: 3px 5px;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    border-radius: 2px;
+    font-size: 95%;
+}
+
+.card-container > a:hover {
+    opacity: 0.6;
+    background-color: var(--card-button-hover);
+}
+
+.card-editor-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: flex-start;
+}
+
+.card-editor {
+    display: none;
+    flex-direction: row;
+    position: absolute;
+    z-index: 3;
+}
+
+.card-editor-col1,
+.card-editor-col2 {
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+}
+
+.card-editor-col1 > textarea {
+    width: 250px;
+    height: 90px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 95%;
+    outline: none;
+    resize: none;
+}
+
+.card-editor-col1 > div {
+    display: flex;
+    flex-direction: row;
+}
+.card-editor-col1 a {
+    width: fit-content;
+}
+
+.card-editor-col1 i {
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.card-editor-col1 i:hover {
+    font-size: 130%;
+    color: white;
+}
+
+.card-editor-col2 > a {
+    width: fit-content;
+    padding: 6px 10px;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 95%;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    transition: all 100ms ease-in-out;
+}
+
+.card-editor-col2 > a:hover {
+    margin-left: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.card-editor-col2 i {
+    color: white;
+    margin-right: 5px;
+}
+
 .footer {
     display: flex;
     flex-direction: row;
@@ -283,13 +404,14 @@ nav, .option-bar {
     justify-content: space-between;
     font-size: 95%;
     cursor: pointer;
+    height: fit-content;
 }
 
 .footer * {
     color: var(--lightertext);
 }
 
-.add-another, .add-another-list {
+.add-another{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -309,13 +431,161 @@ nav, .option-bar {
     background-color: rgba(25, 25, 25, 0.1);
 }
 
-.last.list {
-    cursor: pointer;
-    background-color: var(--boardbutton-hover);
+.last-list {
+    width: 270px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    padding: 5px 0;
+    margin-right: 10px;
+    height: fit-content;
+    position: relative;
 }
 
-.last.list:hover {
-    background-color: rgba(255, 255, 255, 0.5);
+.last-list:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+}
+
+.last-list > .add-another {
+    width: 270px;
+}
+
+.last-list > .add-another > * {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 95%;
+}
+
+.last-list > .add-another:hover {
+    background-color: transparent;
+}
+
+.new-list {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #EBECF0;
+    padding: 5px;
+    border-radius: 3px;
+    height: fit-content;
+}
+
+.new-card {
+    display: none;
+    flex-direction: column;
+    position: relative;
+}
+
+.new-list > input, 
+.new-card > textarea {
+    width: 100%;
+    font-size: 95%;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    background-color: white;
+    border-color: var(--outline);
+}
+
+.new-card > textarea {
+    outline: none;
+    resize: none;
+    height: 60px;
+    box-shadow: 0px 1px 0.1px rgba(128, 128, 128, 0.5);
+    border-color: transparent;
+}
+
+.new-list > input::placeholder, 
+.new-card > input::placeholder {
+    color: var(--text);
+}
+
+.new-list > input:focus,
+.new-card > input:focus {
+    outline-color: var(--outline);
+}
+
+.new-list > div,
+.new-card > div {
+    margin: 5px 0;
+}
+
+.new-list > div > a,
+.new-card > div > a,
+.card-editor-col1 a {
+    font-size: 95%;
+    color: white;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 4px;
+    background-color: rgba(17, 158, 17, 0.8);
+}
+
+.new-list > div > a:hover,
+.new-card > div > a:hover,
+.card-editor-col1 a:hover {
+    background-color: rgba(23, 185, 23, 0.8);
+}
+
+.new-list i,
+.new-card i,
+.card-editor-col1 i {
+    transform: rotate(45deg);
+    font-size: 120%;
+}
+
+.update-List {
+    display: none;
+    flex-direction: column;
+    width: 310px;
+    height: fit-content;
+    padding: 15px 0;
+    position: absolute;
+    top: 40px;
+    left: 230px;
+    border: 1px solid var(--card-button-hover);
+    background-color: white;
+    border-radius: 3px;
+    z-index: 2;
+}
+
+.update-List p {
+    font-size: 95%;
+    text-align: center;
+    opacity: 0.9;
+}
+
+.update-List > a {
+    font-size: 97%;
+    padding: 6px 15px;
+}
+
+.update-List > a:hover {
+    background-color: var(--card-button);
+}
+
+.list-separator {
+    width: 280px;
+    height: 1px;
+    margin: 10px 15px;
+    background-color: var(--card-button-hover);
+}
+
+.p-div {
+    position: relative;
+}
+
+.update-List i {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    cursor: pointer;
+    transform: rotate(45deg);
+    font-size: 105%;
+    z-index: 3;
 }
 
 .card-bg {
@@ -354,6 +624,7 @@ nav, .option-bar {
     display: flex;
     flex-direction: row;
     margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .card-title-bar {
@@ -412,8 +683,6 @@ nav, .option-bar {
 .addtoCard {
     display: flex;
     flex-flow: row wrap;
-    margin-top: 20px;
-    margin-bottom: 20px;
     margin-left: 45px;
 }
 
@@ -426,7 +695,7 @@ nav, .option-bar {
 .members, .labels, .due-date {
     display: flex;
     flex-direction: column;
-    margin-left: 15px;
+    margin-right: 15px;
     margin-bottom: 10px;
 }
 
@@ -435,29 +704,56 @@ nav, .option-bar {
     flex-flow: row wrap;
 }
 
-.members-body > a {
-    padding: 0 10px;
-    padding-top: 3px;
+.labels-body > a {
+    padding: 2px 10px;
     background-color: var(--card-button);
     font-size: 120%;
-    border-radius: 20px;
+    border-radius: 3px;
 }
 
-.members-body > a:hover {
+.addmember:hover, .name:hover,
+.labels-body > a:hover {
     background-color: var(--card-button-hover);
 }
 
-.label {
-    width: 40px;
+.addmember {
+    padding: 2px 9px;
+    background-color: var(--card-button);
+    font-size: 120%;
+    border-radius: 15px;
+}
+
+.name {
+    min-width: 30px;
     height: 30px;
-    padding: 5px;
-    margin-left: 5px;
+    padding: 5px 6.5px;
+    margin-right: 5px;
+    background-color: var(--card-button);
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.label {
+    min-width: 40px;
+    max-width: fit-content;
+    height: 30px;
+    padding: 5px 10px;
+    margin-right: 5px;
     border-radius: 3px;
     cursor: pointer;
 }
 
 .label:hover {
-    opacity: 0.5;
+    opacity: 0.7;
+}
+
+.name > p{
+    font-size: 93%;
+    font-weight: bold;
+}
+.label > p {
+    color: white;
+    font-size: 93%;
 }
 
 .header {
@@ -577,14 +873,19 @@ nav, .option-bar {
 .check {
     display: flex;
     flex-direction: row;
+    margin: 0 5px;
+    padding: 5px 0;
+}
+
+.check:hover {
+    background-color: var(--card-button);
 }
 
 .check input {
-    width: 17px;
-    height: 17px;
+    width: 15px;
+    height: 15px;
     margin: 0 10px;
-    background-color: red;
-    border-color: blue;
+    background-color: var(--card-button);
 }
 
 .check > label {
