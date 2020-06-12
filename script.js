@@ -225,7 +225,7 @@ function showCard(data) {
                     </div>
                     <div class="activity-body">
                         <div class="comment-section">
-                            <img src="image/profile.jpg" alt="#" id="profile">
+                            <img src="image/ttb.jpg" alt="profile" id="profile">
                             <textarea class="comment" placeholder="Write a comment..."></textarea>
                         </div>
                         <div class="activities"></div>
