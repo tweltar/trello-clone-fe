@@ -23,7 +23,12 @@ function createList(listdata) {
     });
     var list = `<div class="list">
     <div class="list-title">
-        <input type="text" value="${listdata.title}">
+        <input type="text" value="${listdata.title}" onclick="showlistTitle(${listdata.id})">
+        <div class="titleList${listdata.id}">
+            <input type="text" value="${listdata.title}" class="updateListTitle${listdata.id}">
+            <a href="#" onclick="updateList(${listdata.id})">Save</a>
+            <i class="fas fa-plus" onclick="closeListTitle(${listdata.id})"></i>
+        </div>
         <a href="#" onclick="showListMenu(${listdata.id})"><i class="fas fa-ellipsis-h"></i></a>
     </div>
     <div class="cards">${card}
@@ -64,42 +69,6 @@ function createList(listdata) {
     return list;
 }
 
-function displayAddCard(id) {
-    document.querySelector('.id'+id).style.display = 'flex';
-    document.querySelector('.footerid'+id).style.display = 'none';
-    document.querySelector('.updateList'+id).style.display = 'none';
-}
-
-function closeAddCard(id) {
-    document.querySelector('.id'+id).style.display = 'none';
-    document.querySelector('.footerid'+id).style.display = 'flex';
-}
-
-function addAnotherList() {
-    var addlist = `<div class="last-list" onclick="displayAddList()">
-            <div class="add-another">
-                <i class="fas fa-plus" style="margin: 0px 5px;"></i>
-                <p>Add another list</p>
-            </div>
-            <div class="new-list">
-                <input type="text" placeholder="Enter list title..." id="list-title">
-                <div>
-                    <a href="#" onclick="newList()">Add List</a>
-                    <i class="fas fa-plus" onclick="closeAddList();event.stopPropagation()"></i>
-                </div>
-            </div>
-        </div>`;
-    return addlist;
-}
-
-function displayAddList() {
-    document.querySelector('.new-list').style.display = 'flex';
-}
-
-// event.stopPropagation() // to stop event bubblinng
-function closeAddList() {
-    document.querySelector('.new-list').style.display = 'none';
-}
 function createCard(carddata) {
     var label = "";
     var card_details = "";
@@ -124,6 +93,51 @@ function createCard(carddata) {
     return card;
 }
 
+function addAnotherList() {
+    var addlist = `<div class="last-list" onclick="displayAddList()">
+            <div class="add-another">
+                <i class="fas fa-plus" style="margin: 0px 5px;"></i>
+                <p>Add another list</p>
+            </div>
+            <div class="new-list">
+                <input type="text" placeholder="Enter list title..." id="list-title">
+                <div>
+                    <a href="#" onclick="newList()">Add List</a>
+                    <i class="fas fa-plus" onclick="closeAddList();event.stopPropagation()"></i>
+                </div>
+            </div>
+        </div>`;
+    return addlist;
+}
+
+function showlistTitle(id) {
+    document.querySelector('.titleList' + id).style.display = 'flex';
+}
+
+function closeListTitle(id) {
+    document.querySelector('.titleList' + id).style.display = 'none';
+}
+
+function displayAddCard(id) {
+    document.querySelector('.id'+id).style.display = 'flex';
+    document.querySelector('.footerid'+id).style.display = 'none';
+    document.querySelector('.updateList'+id).style.display = 'none';
+}
+
+function closeAddCard(id) {
+    document.querySelector('.id'+id).style.display = 'none';
+    document.querySelector('.footerid'+id).style.display = 'flex';
+}
+
+function displayAddList() {
+    document.querySelector('.new-list').style.display = 'flex';
+}
+
+// event.stopPropagation() // to stop event bubblinng
+function closeAddList() {
+    document.querySelector('.new-list').style.display = 'none';
+}
+
 function cardEditor(id, title) {
     var card = document.querySelector('.card'+id);
     var top = card.getBoundingClientRect().top;
@@ -144,7 +158,7 @@ function cardEditor(id, title) {
         <a href="#"><i class="fas fa-arrow-right card-option-icon"></i>Move</a>
         <a href="#"><i class="far fa-copy card-option-icon"></i>Copy</a>
         <a href="#"><i class="far fa-clock card-option-icon"></i>Change Due Date</a>
-        <a href="#"><i class="fas fa-archive card-option-icon"></i>Archive</a>
+        <a href="#" onclick="deleteCard(${id})"><i class="fas fa-archive card-option-icon"></i>Archive</a>
     </div>
     </div>
     </div>`;
@@ -367,30 +381,38 @@ function closeListMenu(id) {
     document.querySelector('.updateList'+id).style.display = 'none';    
 }
 
-function updateList() {
-    
-}
-
-function deleteList(id) {
+function updateList(id) {
+    var title = document.querySelector('.updateListTitle'+id).value;
+    const list = {
+        title: title,
+        position: 5,
+        status: 1
+    };
     fetch(API_END_POINT + '/list/' + id, {
-        method: 'DELETE',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-        }
-    }).then(response => response.json())
+        },
+        body: JSON.stringify(list)
+    }).then(res => res.json())
     .then(data => {
         console.log(data);
         this.loadData();
-    })
-    .catch(err => {
+    }).catch(err => {
         console.log(err);
     });
-    console.log('deleted!');
+}
+
+function deleteList(id) {
+    fetch(API_END_POINT + "/list/" + id, {
+        method: 'DELETE'
+    });
+    this.loadData();
+    this.loadData();
 }
 
 function newCard(id) {
     const card_title = document.querySelector('.add_card'+id).value;
-console.log(card_title);
 
     if (card_title != "") {
         const card = {
@@ -443,7 +465,7 @@ function updateCard(id) {
             body: JSON.stringify(card)
         }).then(res => res.json())
         .then(data => {
-            console.log('updated card'+data);
+            console.log('updated card '+data);
             this.loadData();
         });
 
@@ -473,4 +495,12 @@ function updateCard(id) {
             });
         });
     });  
+}
+
+function deleteCard(id) {    
+    fetch(API_END_POINT + '/card/' + id, {
+        method: 'DELETE',
+    });
+    this.loadData();
+    this.loadData();
 }

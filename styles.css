@@ -222,6 +222,7 @@ nav, .option-bar {
 .list-title {
     display: flex;
     flex-direction: row;
+    position: relative;
 }
 
 .list .list-title > input {
@@ -235,8 +236,50 @@ nav, .option-bar {
     cursor: pointer;
 }
 
-.list .list-title > input:focus {
+.list-title > div {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    z-index: 5;
+    display: none;
+    flex-direction: column;
+}
+
+.list-title > div > input {
+    width: 225px;
+    padding: 3.5px 5px;
+    border-radius: 3px;
     outline-color: var(--outline);
+    border-color: var(--outline);
+    margin-bottom: 5px;
+    color: var(--text);
+    font-weight: bold;
+}
+
+.list-title > div > a{
+    background-color: rgba(17, 158, 17, 0.95);
+    color: white;
+    font-size: 95%;
+    padding: 4px 5px;
+    border-radius: 5px;
+    width: 50px;
+    text-align: center;
+}
+
+.list-title > div > a:hover {
+    background-color: rgba(23, 185, 23, 0.95);
+}
+
+.list-title > div > i {
+    position: absolute;
+    top: 35px;
+    left: 55px;
+    background-color: black;
+    color: white;
+    padding: 7px;
+    transform: rotate(45deg);
+    border-radius: 15px;
+    cursor: pointer;
 }
 
 .list .list-title > a {
