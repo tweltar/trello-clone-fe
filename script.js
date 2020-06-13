@@ -107,21 +107,39 @@ function createList(listdata) {
 function createCard(carddata) {
     var label = "";
     var card_details = "";
+    var members = "";
+
     carddata.labels.map(l => {
         label += `<div class="label-div" style="background-color: ${l.color};"></div>`;
     })    
 
-    if (carddata.description !== "") {
+    if (carddata.description !== "" || carddata.description !== null) {
         card_details += `<div><i class="fas fa-align-justify"></i></div>`;
     }
     if (carddata.checklists.length !== 0) {
         card_details += '<div><i class="far fa-check-square"></i></div>';
     }
 
+    if (carddata.members.length !== 0) {
+        var memArray = [];
+        var i = 0;
+
+        carddata.members.map(mem => {
+            memArray[i++] = mem.name.split(" ");
+        })    
+
+        memArray.map(arr => {
+            members += `<div class="cardmem"><p>${arr[0].charAt(0)}${arr[1].charAt(0)}</p></div>`;
+        })
+    }
+
     var card = `<div class="card-container"><div class="card card${carddata.id}" onclick="clickCard(${carddata.id})">
         <div class="label-bar">${label}</div>
         <p>${carddata.title}</p>
-        <div class="card-details">${card_details}</div>
+        <div class="card-details">
+            ${card_details}
+            <div class="cardmembers">${members}</div>
+        </div>
     </div>
     <a href="#" onclick="cardEditor('${carddata.id}', '${carddata.title}')"><i class="far fa-edit"></i></a>
     </div>`;    

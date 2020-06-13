@@ -201,20 +201,38 @@ nav, .option-bar {
     margin: 0 2px;
 }
 
+.boardmembers > *:hover {
+    background-color: var(--boardbutton-hover);
+}
+
 .boardmem {
     min-width: 30px;
     height: 30px;
     padding: 5px 6.5px;
-    margin-right: 0px;
-    background-color: rgba(190, 190, 190, 0.5);
+    margin-right: -5px;
+    background-color: var(--navbutton);
     border-radius: 15px;
     cursor: pointer;
 }
 
 .boardmem > p {
     font-size: 85%;
-    color: var(--text);
-    font-weight: bold;
+    color: white;
+    font-weight: normal;
+}
+
+.moreMem {
+    width: 40px;
+    padding: 5px 10px;
+    background-color: var(--navbutton);
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.moreMem > p {
+    font-size: 80%;
+    color: white;
+    text-align: center;
 }
 
 .content {
@@ -361,6 +379,7 @@ nav, .option-bar {
 .card-details {
     display: flex;
     flex-direction: row;
+    align-items: baseline;
     margin: 3px 0;
     padding: 0 3px;
 }
@@ -368,6 +387,25 @@ nav, .option-bar {
 .card-details > div {
     font-size: 95%;
     margin-right: 15px;
+}
+
+.cardmembers {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.cardmem {
+    min-width: 28px;
+    height: 28px;
+    padding: 5px 6px;
+    background-color: var(--card-button-hover);
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.cardmem > p {
+    font-size: 85%;
 }
 
 .card-container > a {
