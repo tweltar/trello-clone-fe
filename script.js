@@ -2,6 +2,7 @@ const API_END_POINT = "https://trello-clone-ppm.herokuapp.com";
 
 window.onload = function () {
     this.loadData();
+    this.boardMembers();
 }
 
 function loadData() {
@@ -13,7 +14,41 @@ function loadData() {
             list = list + this.createList(data);
         });
         document.querySelector('.content').innerHTML = list + this.addAnotherList();
-    }).catch(err => console.log(err));       
+    }).catch(err => console.log(err));  
+}
+
+function boardMembers() {
+    fetch(API_END_POINT + '/account')
+    .then(response => response.json())
+    .then(data => {
+        var memArray = [];
+        var i = 0, name ="";
+
+        if (data.length > 5) {
+            for (let j = 0; j < 5; j++) {
+                memArray[j] = data[j].name.split(" ");
+            }   
+            
+            memArray.map(arr => {
+                name += `<div class="boardmem"><p>${arr[0].charAt(0)}${arr[1].charAt(0)}</p></div>`;
+            })
+            
+            name += `<div class="moreMem"><p>+${data.length - 5}</p></div>`;
+        } 
+        else {
+            data.map(mem => {
+                memArray[i++] = mem.name.split(" ");
+            })    
+
+            memArray.map(arr => {
+                name += `<div class="boardmem"><p>${arr[0].charAt(0)}${arr[1].charAt(0)}</p></div>`;
+            })    
+        }
+
+        document.querySelector('.boardmembers').innerHTML = name;
+    })
+
+    
 }
 
 function createList(listdata) {
