@@ -1,0 +1,1069 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+body {
+    overflow-y: hidden;
+    background-image: url(image/ban-yido-unsplash.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+:root {
+    --navbutton: rgba(255, 255, 255, 0.2);
+    --navbutton-hover: rgba(255, 255, 255, 0.1);
+    --boardbutton-hover: rgba(255, 255, 255, 0.3);
+    --text: rgba(12, 18, 66, 0.7);
+    --lightertext: rgba(25, 25, 25, 0.5);
+    --card-button: rgba(190, 190, 190, 0.2);
+    --card-button-hover: rgba(190, 190, 190, 0.5);
+    --outline: rgba(14, 100, 212, 0.911);
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: relative;
+    height: auto;
+    padding: 4px;
+}
+
+.logo {
+    font-family: 'Pattaya', sans-serif;
+    position: absolute;
+    left: 48%;
+    top: 0;
+    font-size: 140%;
+    margin-top: 5px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.logo:hover {
+    color: white;
+}
+
+
+nav, .option-bar {
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    justify-content: space-between;
+}
+
+.nav {
+    padding: 4px 8px;
+    margin-right: 4px;
+    background-color: var(--navbutton);
+    height: 32px;
+    font-size: 105%;
+    color: white;
+    border-radius: 3px;
+    transition: background-color 200ms ease-in-out;
+}
+
+.nav:hover {
+    background-color: var(--navbutton-hover);
+}
+
+.boards {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    color: white;
+}
+
+.boards p {
+    font-size: 80%;
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+.searchbox {
+    width: 150px;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    transition: background-color 200ms ease-in;
+}
+
+.search {
+    background-color: var(--navbutton);
+}
+
+.search:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.searchbox:focus {
+    width: 300px;
+    padding: 6.5px;
+    background-color: white;
+}
+
+#search-icon {
+    opacity: 1;
+    color: white;
+    padding: 6px 8px;
+    font-size: 105%;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.searchbox:focus + #search-icon{
+    display: none;
+}
+
+#profile {
+    width: 32px;
+    height: 32px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.board-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.board-details1 {
+    display: flex;
+    flex-direction: row;
+    align-items: inherit;
+}
+
+.board-title {
+    font-size: 110%; 
+    font-weight: bolder; 
+    color: white;
+    padding: 0 10px;
+}
+
+.board-details1 > p {
+    color: white;
+}
+
+.board-details2 {
+    display: flex;
+    flex-direction: row;
+}
+
+.board-details1 > *,
+.board-details2 > * {
+    margin: 0 2px;
+}
+
+.free {
+    padding: 1px 5px;
+    border-radius: 15px;
+    font-size: x-small;
+    margin-left: 8px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.detail {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    font-size: 80%;
+    padding: 5px 8px;
+    border-radius: 3px;
+    background-color: var(--navbutton);
+    transition: all 200ms ease-out;
+}
+
+.detail:hover {
+    background-color: var(--boardbutton-hover);
+}
+
+.detail > i {
+    font-size: 98%;
+    margin-right: 8px;
+}
+
+.content {
+    height: 87vh;
+    padding: 3px 10px;
+    overflow-y: hidden;
+    font-size: 85%;
+    color: var(--text);
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.content * {
+    color: var(--text);
+}
+
+.list {
+    width: 270px;
+    background-color: #EBECF0;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 3px;
+    height: fit-content;
+    position: relative;
+}
+
+.list-title {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.list .list-title > input {
+    background-color: transparent;
+    outline-color: transparent;
+    border: none;
+    border-radius: 3px;
+    width: 235px;
+    padding: 3px 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.list-title > div {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    z-index: 5;
+    display: none;
+    flex-direction: column;
+}
+
+.list-title > div > input {
+    width: 225px;
+    padding: 3.5px 5px;
+    border-radius: 3px;
+    outline-color: var(--outline);
+    border-color: var(--outline);
+    margin-bottom: 5px;
+    color: var(--text);
+    font-weight: bold;
+}
+
+.list-title > div > a{
+    background-color: rgba(17, 158, 17, 0.95);
+    color: white;
+    font-size: 95%;
+    padding: 4px 5px;
+    border-radius: 5px;
+    width: 50px;
+    text-align: center;
+}
+
+.list-title > div > a:hover {
+    background-color: rgba(23, 185, 23, 0.95);
+}
+
+.list-title > div > i {
+    position: absolutesss;
+}
+
+.list .list-title > a {
+    padding: 4px 7px;
+    border-radius: 2px;
+}
+
+.list .list-title > a:hover {
+    background-color: var(--card-button);
+}
+
+.cards {
+    max-height: 73vh;
+    overflow-y: auto;
+}
+
+.card-container {
+    position: relative;
+}
+
+.card {
+    background-color: white;
+    margin: 6px 0;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: 0px 1px 0.1px rgba(128, 128, 128, 0.5);
+}
+
+.card:hover {
+    background-color: #f3f3f3;
+}
+
+.card:hover + a {
+    opacity: 0.6;
+}
+
+.label-bar {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.card > p {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 95%;
+}
+
+.label-div {
+    width: 40px;
+    height: 8px;
+    border-radius: 5px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+}
+
+.card-details {
+    display: flex;
+    flex-direction: row;
+    margin: 3px 0;
+    padding: 0 3px;
+}
+
+.card-details > div {
+    font-size: 95%;
+    margin-right: 15px;
+}
+
+.card-container > a {
+    opacity: 0;
+    padding: 3px 5px;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    border-radius: 2px;
+    font-size: 95%;
+}
+
+.card-container > a:hover {
+    opacity: 0.6;
+    background-color: var(--card-button-hover);
+}
+
+.card-editor-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: flex-start;
+}
+
+.card-editor {
+    display: none;
+    flex-direction: row;
+    position: absolute;
+    z-index: 3;
+}
+
+.card-editor-col1,
+.card-editor-col2 {
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+}
+
+.card-editor-col1 > textarea {
+    width: 250px;
+    height: 90px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 95%;
+    outline: none;
+    resize: none;
+}
+
+.card-editor-col1 > div {
+    display: flex;
+    flex-direction: row;
+}
+.card-editor-col1 a {
+    width: fit-content;
+}
+
+.card-editor-col1 i {
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.card-editor-col1 i:hover {
+    font-size: 130%;
+    color: white;
+}
+
+.card-editor-col2 > a {
+    width: fit-content;
+    padding: 6px 10px;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 95%;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    transition: all 100ms ease-in-out;
+}
+
+.card-editor-col2 > a:hover {
+    margin-left: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.card-editor-col2 i {
+    color: white;
+    margin-right: 5px;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 95%;
+    cursor: pointer;
+    height: fit-content;
+}
+
+.footer * {
+    color: var(--lightertext);
+}
+
+.add-another{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 235px;
+    margin: 2px 0;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.template {
+    padding: 8px;
+    border-radius: 3px;
+}
+
+.add-another:hover, 
+.template:hover {
+    background-color: rgba(25, 25, 25, 0.1);
+}
+
+.last-list {
+    width: 270px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    padding: 5px 0;
+    margin-right: 10px;
+    height: fit-content;
+    position: relative;
+}
+
+.last-list:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+}
+
+.last-list > .add-another {
+    width: 270px;
+}
+
+.last-list > .add-another > * {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 95%;
+}
+
+.last-list > .add-another:hover {
+    background-color: transparent;
+}
+
+.new-list {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #EBECF0;
+    padding: 5px;
+    border-radius: 3px;
+    height: fit-content;
+}
+
+.new-card {
+    display: none;
+    flex-direction: column;
+    position: relative;
+}
+
+.new-list > input, 
+.new-card > textarea {
+    width: 100%;
+    font-size: 95%;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    background-color: white;
+    border-color: var(--outline);
+}
+
+.new-card > textarea {
+    outline: none;
+    resize: none;
+    height: 60px;
+    box-shadow: 0px 1px 0.1px rgba(128, 128, 128, 0.5);
+    border-color: transparent;
+}
+
+.new-list > input::placeholder, 
+.new-card > input::placeholder {
+    color: var(--text);
+}
+
+.new-list > input:focus,
+.new-card > input:focus {
+    outline-color: var(--outline);
+}
+
+.new-list > div,
+.new-card > div {
+    margin: 5px 0;
+}
+
+.new-list > div > a,
+.new-card > div > a,
+.card-editor-col1 a {
+    font-size: 95%;
+    color: white;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 4px;
+    background-color: rgba(17, 158, 17, 0.8);
+}
+
+.new-list > div > a:hover,
+.new-card > div > a:hover,
+.card-editor-col1 a:hover {
+    background-color: rgba(23, 185, 23, 0.8);
+}
+
+.new-list i,
+.new-card i,
+.card-editor-col1 i {
+    transform: rotate(45deg);
+    font-size: 120%;
+}
+
+.update-List {
+    display: none;
+    flex-direction: column;
+    width: 310px;
+    height: fit-content;
+    padding: 15px 0;
+    position: absolute;
+    top: 40px;
+    left: 230px;
+    border: 1px solid var(--card-button-hover);
+    background-color: white;
+    border-radius: 3px;
+    z-index: 2;
+}
+
+.update-List p {
+    font-size: 95%;
+    text-align: center;
+    opacity: 0.9;
+}
+
+.update-List > a {
+    font-size: 97%;
+    padding: 6px 15px;
+}
+
+.update-List > a:hover {
+    background-color: var(--card-button);
+}
+
+.list-separator {
+    width: 280px;
+    height: 1px;
+    margin: 10px 15px;
+    background-color: var(--card-button-hover);
+}
+
+.p-div {
+    position: relative;
+}
+
+.update-List i {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    cursor: pointer;
+    transform: rotate(45deg);
+    font-size: 105%;
+    z-index: 3;
+}
+
+.card-bg {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    display: none;
+}
+
+.card-popup {
+    display: flex;
+    flex-direction: column;
+    width: 55vw;
+    height: fit-content;
+    margin: 50px 0;
+    padding: 15px;
+    border-radius: 2px;
+    background-color: #f5f5f5;
+    position: relative;
+}
+
+.card-icon {
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 130%;
+}
+
+.card-header  {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.card-title-bar {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+.card-title {
+    font-size: 145%;
+    font-weight: bolder;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    margin-bottom: 5px;
+    padding-left: 5px;
+    outline-color: var(--outline);
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: x-large;
+    padding: 0 12px;
+    transform: rotate(45deg);
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+.close:hover {
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.card-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-col:first-child {
+    width: 75%;
+    margin-right: 10px;
+}
+
+.card-col:last-child {
+    width: 25%;
+    margin-left: 10px;
+}
+
+.addtoCard {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: 45px;
+}
+
+.addtoCard h4 {
+    font-size: 90%;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.members, .labels, .due-date {
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.members-body, .labels-body {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.labels-body > a {
+    padding: 2px 10px;
+    background-color: var(--card-button);
+    font-size: 120%;
+    border-radius: 3px;
+}
+
+.addmember:hover, .name:hover,
+.labels-body > a:hover {
+    background-color: var(--card-button-hover);
+}
+
+.addmember {
+    padding: 2px 9px;
+    background-color: var(--card-button);
+    font-size: 120%;
+    border-radius: 15px;
+}
+
+.name {
+    min-width: 30px;
+    height: 30px;
+    padding: 5px 6.5px;
+    margin-right: 5px;
+    background-color: var(--card-button);
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.label {
+    min-width: 40px;
+    max-width: fit-content;
+    height: 30px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.label:hover {
+    opacity: 0.7;
+}
+
+.name > p{
+    font-size: 93%;
+    font-weight: bold;
+}
+.label > p {
+    color: white;
+    font-size: 93%;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.header > div {
+    display: flex;
+    flex-direction: row;
+}
+
+.header h3 {
+    margin-left: 10px;
+}
+
+.description > textarea {
+    margin-left: 45px;
+    margin-top: 15px;
+    width: 90.5%;
+    min-height: 60px;
+    resize: none;
+    padding: 10px;
+    font-size: 95%;
+    border: none;
+    border-radius: 3px;
+    background-color: var(--card-button);
+    outline-color: var(--outline);
+}
+
+.description > textarea:hover {
+    background-color: var(--card-button-hover);
+}
+
+.description > textarea:focus {
+    height: 100px;
+    background-color: white;
+}
+
+.description > textarea:focus + .save-desc {
+    display: flex;
+    flex-direction: row;
+}
+
+.save-desc {
+    margin-left: 45px;
+    margin-top: 10px;
+    display: none;
+}
+
+.save-desc > a:first-child,
+.save-check > a:first-child {
+    padding: 5px 10px;
+    font-size: 90%;
+    border-radius: 3px;
+    color: white;
+    background-color: rgba(17, 158, 17, 0.8);
+}
+
+.save-desc > a:first-child:hover,
+.save-check > a:first-child:hover {
+    background-color: rgba(23, 185, 23, 0.8);
+}
+
+.save-desc > i, .save-check > i {
+    font-size: 130%;
+    margin-left: 10px;
+    padding-top: 5px;
+    cursor: pointer;
+}
+
+.checklist > div:first-child {
+    display: flex;
+    flex-direction: row;
+}
+
+.checklist .header {
+    position: relative;
+    align-items: baseline;
+}
+
+.check-buttons {
+    margin-right: 5px;
+}
+
+.check-hide {
+    width: 98%;
+    min-height: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 5px;
+    padding: 5px;
+    border: 1px solid rgba(190, 190, 190, 0.4);
+    background-color: var(--card-button);
+    display: none;
+    outline: none;
+    font-size: 115%;
+    font-weight: bold;
+    resize: none;
+}
+
+.save-check {
+    margin-left: 43px;
+    margin-top: 50px;
+    display: none;
+}
+
+.checklist-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.check {
+    display: flex;
+    flex-direction: row;
+    margin: 0 5px;
+    padding: 5px 0;
+}
+
+.check:hover {
+    background-color: var(--card-button);
+}
+
+.check input {
+    width: 15px;
+    height: 15px;
+    margin: 0 10px;
+    background-color: var(--card-button);
+}
+
+.check > label {
+    margin-left: 10px;
+}
+
+.check input:checked + label {
+    text-decoration: line-through;
+}
+
+.buttons {
+    padding: 6px 11px;
+    margin: 5px 0;
+    font-size: 96%;
+    border-radius: 3px;
+    background-color: var(--card-button);
+}
+
+.buttons:hover {
+    background-color: var(--card-button-hover);
+}
+
+.add-check {
+    width: fit-content;
+    margin-left: 45px;
+    margin-top: 15px;
+}
+
+.activity-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-section {
+    display: flex;
+    flex-direction: row;
+}
+
+.comment {    
+    margin-left: 15px;
+    width: 100%;
+    height: 40px;
+    background-color: white;
+    border: 1px solid var(--card-button-hover);
+    padding: 10px;
+    font-size: 95%;
+    overflow-y: hidden;
+    resize: none;
+    outline: none;
+}
+
+.comment:hover {
+    box-shadow: 0.5px 1px 0.1px rgba(128, 128, 128, 0.3), -0.5px 0px 0.1px rgba(128, 128, 128, 0.3);
+}
+
+.comment:focus {
+    min-height: 80px;
+}
+
+textarea::placeholder {
+    color: rgba(15, 22, 87, 0.6);
+}
+
+.card-option-icon {
+    margin-right: 10px;
+}
+
+.card-col:last-child h4 {
+    text-transform: uppercase;
+    margin-top: 10px;
+    font-size: 90%;
+}
+
+.upgrade-team {
+    width: fit-content;
+    font-size: x-small;
+    padding: 5px;
+    border-radius: 2px;
+    background-color: rgba(174, 71, 214, 0.2);
+}
+
+.upgrade-team:hover {
+    background-color: rgba(174, 71, 214, 0.4);
+}
+
+.label-bg {
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    top: 40px;
+    right: 220px;
+    border-radius: 3px;
+    padding: 10px;
+    background-color: white;
+    display: none;
+    flex-direction: column;
+}
+
+.label-bg > p {
+    text-align: center;
+    font-size: 95%;
+}
+
+.label-separator {
+    margin: 10px 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--card-button-hover);
+}
+
+.label-bg > input {
+    padding: 5px;
+    border: 2px solid var(--card-button-hover);
+    border-radius: 2px;
+    position: sticky;
+}
+
+.label-bg > input[type = 'search']::placeholder {
+    font-size: 95%;
+    color: rgba(15, 22, 87, 0.6);
+}
+
+.label-bg > input:focus {
+    outline-color: var(--outline);
+}
+
+.suggested-label {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.label-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.edit-label {
+    padding: 3px 6px;
+}
+
+.edit-label:hover {
+    background-color: var(--card-button-hover);
+    border-radius: 3px;
+    padding: 3px 6px;
+}
